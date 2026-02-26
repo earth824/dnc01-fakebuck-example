@@ -62,7 +62,7 @@ export default function RegisterForm() {
 
         {/* Submit */}
         <Field>
-          <Button className="rounded-full bg-blue-600">Submit</Button>
+          <Button className="rounded-full">Submit</Button>
         </Field>
         <Field>
           <Button variant="outline" className="rounded-full">
