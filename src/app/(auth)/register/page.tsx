@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 export default function RegisterPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div className="min-h-screen flex items-center justify-center bg-white">
       <div className="max-w-xl mx-auto px-4 py-6">
         <div className="grid gap-6">
           {/* Back button */}

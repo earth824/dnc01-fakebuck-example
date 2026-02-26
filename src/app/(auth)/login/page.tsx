@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export default function LoginPage() {
   return (
-    <div className="min-h-screen flex justify-center items-center">
+    <div className="min-h-screen flex justify-center items-center bg-white">
       <div className="w-full max-w-xl px-8">
         <div className="flex justify-center mb-6">
           <Image alt="Fakebuck" src="/logo.png" width={60} height={60} />
