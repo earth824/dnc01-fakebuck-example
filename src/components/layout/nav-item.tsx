@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { Home, LucideProps } from 'lucide-react';
+import { LucideProps } from 'lucide-react';
 import Link from 'next/link';
 import { ForwardRefExoticComponent, RefAttributes } from 'react';
 
