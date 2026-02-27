@@ -2,13 +2,11 @@ import { Button } from '@/components/ui/button';
 
 export default function FriendCard() {
   return (
-    <div className="bg-white rounded-lg shadow-sm overflow-hidden w-full max-w-60 border">
+    <div className="bg-background rounded-lg shadow-sm overflow-hidden w-full max-w-60 border">
       {/* Profile image */}
       <div className="relative aspect-square w-full">
-        {/* <Image src="" alt="" fill className="object-cover" /> */}
-        <div className="h-full bg-muted flex items-center justify-center text-3xl font-bold select-none">
-          John Doe
-        </div>
+        {/* <Image src="/default-user.png" alt="" fill className="object-cover" /> */}
+        <div className="h-full bg-muted flex items-center justify-center"></div>
       </div>
 
       {/* Info + actions */}

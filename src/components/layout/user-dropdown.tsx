@@ -16,7 +16,7 @@ export default function UserDropdown() {
       <DropdownMenuTrigger asChild>
         <button className="outline-none">
           <Avatar className="size-10">
-            <AvatarImage src="/user.png" alt="User" />
+            <AvatarImage src="/default-user.png" alt="User" />
           </Avatar>
         </button>
       </DropdownMenuTrigger>
@@ -30,7 +30,7 @@ export default function UserDropdown() {
         >
           <Link href="/profile">
             <Avatar className="size-9">
-              <AvatarImage src="/user.png" alt="User" />
+              <AvatarImage src="/default-user.png" alt="User" />
             </Avatar>
             <div>
               <p className="font-semibold text-sm">Your Name</p>

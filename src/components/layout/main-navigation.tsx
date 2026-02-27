@@ -19,7 +19,7 @@ export default function MainNavigation() {
             key={href}
             icon={icon}
             href={href}
-            isActive={pathname.startsWith(href)}
+            isActive={pathname === href}
           />
         );
       })}

@@ -2,15 +2,14 @@ import { Button } from '@/components/ui/button';
 import { Users } from 'lucide-react';
 import Link from 'next/link';
 
-export default function FriendPage() {
+export default function OutgoingRequestPage() {
   return (
     <div className="flex flex-col items-center justify-center h-full p-8">
       <div className="mb-4 text-muted-foreground">
         <Users className="size-24 mx-auto opacity-40" />
       </div>
       <p className="text-muted-foreground font-medium">
-        You don’t have any friends yet. Find people you may know.
-        {/* No pending friend requests. */}
+        You haven’t sent any friend requests yet.
       </p>
       <div className="mt-4">
         <Button variant="outline" asChild>
