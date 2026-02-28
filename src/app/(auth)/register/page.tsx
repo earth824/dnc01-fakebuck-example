@@ -23,13 +23,7 @@ export default function RegisterPage() {
           </div>
 
           {/* Meta logo */}
-          <Image
-            alt="meta"
-            src="/meta.svg"
-            width={60}
-            height={12}
-            quality={100}
-          />
+          <Image alt="meta" src="/meta.svg" width={60} height={12} />
 
           {/* Title */}
           <div className="grid gap-1.5">
@@ -42,6 +36,10 @@ export default function RegisterPage() {
 
           {/* Register form */}
           <RegisterForm />
+
+          <Button variant="outline" className="rounded-full" asChild>
+            <Link href="/login">I already have an account</Link>
+          </Button>
         </div>
       </div>
     </div>
