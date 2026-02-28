@@ -9,7 +9,7 @@ const sessionUserSchema = z.object({
   lastName: z.string(),
   avatarUrl: z.string().nullable(),
   coverUrl: z.string().nullable(),
-  accessToken: z.string
+  accessToken: z.string()
 });
 
 export const getAuthenticatedUser = async () => {

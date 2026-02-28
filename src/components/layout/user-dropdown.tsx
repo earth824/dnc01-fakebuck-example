@@ -1,4 +1,4 @@
-import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -6,17 +6,24 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
+import { logout } from '@/lib/actions/auth.action';
+import { getAuthenticatedUser } from '@/lib/auth/session';
 import { LogOut } from 'lucide-react';
 import Link from 'next/link';
 
-export default function UserDropdown() {
+export default async function UserDropdown() {
+  const currentUser = await getAuthenticatedUser();
   return (
     <DropdownMenu>
       {/* Toggle User Menu */}
       <DropdownMenuTrigger asChild>
         <button className="outline-none">
           <Avatar className="size-10">
-            <AvatarImage src="/user.png" alt="User" />
+            <AvatarImage
+              src={currentUser.avatarUrl ?? '/user.png'}
+              alt="User"
+            />
+            <AvatarFallback className="bg-muted"></AvatarFallback>
           </Avatar>
         </button>
       </DropdownMenuTrigger>
@@ -30,7 +37,10 @@ export default function UserDropdown() {
         >
           <Link href="/profile">
             <Avatar className="size-9">
-              <AvatarImage src="/user.png" alt="User" />
+              <AvatarImage
+                src={currentUser.avatarUrl ?? '/user.png'}
+                alt="User"
+              />
             </Avatar>
             <div>
               <p className="font-semibold text-sm">Your Name</p>
@@ -46,7 +56,7 @@ export default function UserDropdown() {
           className="p-2 rounded-md w-full cursor-pointer"
           asChild
         >
-          <button>
+          <button onClick={logout}>
             <div className="size-9 bg-gray-300 rounded-full flex items-center justify-center">
               <LogOut />
             </div>
