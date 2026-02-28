@@ -16,8 +16,11 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select';
+import { register } from '@/lib/actions/auth.action';
 import { RegisterInput, registerSchema } from '@/lib/schemas/auth.schema';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Loader } from 'lucide-react';
+import { useTransition } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 export default function RegisterForm() {
@@ -33,7 +36,13 @@ export default function RegisterForm() {
     resolver: zodResolver(registerSchema)
   });
 
-  const onSubmit = (data: RegisterInput) => {};
+  const [isPending, startTransition] = useTransition();
+
+  const onSubmit = (data: RegisterInput) => {
+    startTransition(async () => {
+      await register(data);
+    });
+  };
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -156,6 +165,7 @@ export default function RegisterForm() {
                 {...field}
                 id={field.name}
                 placeholder="Password"
+                type="password"
                 aria-invalid={fieldState.invalid}
               />
               {fieldState.invalid && (
@@ -167,7 +177,15 @@ export default function RegisterForm() {
 
         {/* Submit */}
         <Field>
-          <Button className="rounded-full">Submit</Button>
+          <Button className="rounded-full" disabled={isPending}>
+            {isPending ? (
+              <>
+                <Loader className="animate-spin" /> Creating your account ...
+              </>
+            ) : (
+              'Submit'
+            )}
+          </Button>
         </Field>
       </FieldGroup>
     </form>
