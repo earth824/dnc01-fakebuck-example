@@ -10,6 +10,5 @@ type LoginResponse = {
 
 export const authService = {
   register: (data: RegisterInput) => api.post('/auth/register', data),
-  login: (data: LoginInput) =>
-    api.post<LoginResponse>('/auth/login', data).then((res) => res.data)
+  login: (data: LoginInput) => api.post<LoginResponse>('/auth/login', data)
 };

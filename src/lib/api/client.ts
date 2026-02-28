@@ -40,7 +40,7 @@ async function apiFetch<T = void>(
     throw new ApiError(err.message, err.code);
   }
 
-  return (await res.json()).data as ApiSuccessData<T>;
+  return (await res.json()).data as T;
 }
 
 export const api = {
