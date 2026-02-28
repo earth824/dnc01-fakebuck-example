@@ -1,5 +1,6 @@
 import { serverEnv } from '@/config/server.env';
-import { ApiError, ApiSuccessData } from '@/lib/api/api-response.type';
+import { ApiError } from '@/lib/api/api-response.type';
+import { auth } from '@/lib/auth/auth';
 
 type RequestOptions = {
   method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
@@ -13,10 +14,13 @@ async function apiFetch<T = void>(
   endpoint: string,
   options: RequestOptions = {}
 ) {
+  const session = await auth();
+
   const { method = 'GET', body, cache } = options;
 
   const headers: Record<string, string> = {};
-  // if (token) headers.Authorization = `Bearer ${token}`;
+  if (session?.user?.accessToken)
+    headers.Authorization = `Bearer ${session?.user?.accessToken}`;
   if (body && !(body instanceof FormData)) {
     headers['Content-type'] = 'application/json';
   }

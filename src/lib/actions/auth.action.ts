@@ -3,7 +3,7 @@
 import { ActionResult } from '@/lib/actions/action.type';
 import { handleActionError } from '@/lib/actions/utils';
 import { authService } from '@/lib/api/auth/auth.service';
-import { signIn } from '@/lib/auth';
+import { signIn } from '@/lib/auth/auth';
 import { LoginInput, RegisterInput } from '@/lib/schemas/auth.schema';
 import { redirect } from 'next/navigation';
 

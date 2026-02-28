@@ -6,7 +6,3 @@ export class ApiError extends Error {
     super(message);
   }
 }
-
-export type ApiSuccessData<T> = {
-  data: T;
-};
