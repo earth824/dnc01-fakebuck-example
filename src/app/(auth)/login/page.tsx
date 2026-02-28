@@ -22,13 +22,7 @@ export default function LoginPage() {
           <Link href="/register">Create new account</Link>
         </Button>
         <div className="flex justify-center mt-7">
-          <Image
-            alt="meta"
-            src="/meta.svg"
-            width={60}
-            height={12}
-            quality={100}
-          />
+          <Image alt="meta" src="/meta.svg" width={60} height={12} />
         </div>
       </div>
     </div>

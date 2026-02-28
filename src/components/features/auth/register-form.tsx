@@ -40,7 +40,12 @@ export default function RegisterForm() {
 
   const onSubmit = (data: RegisterInput) => {
     startTransition(async () => {
-      await register(data);
+      const res = await register(data);
+      if (!res.success && res.code === 'EMAIL_ALREADY_EXISTS') {
+        form.setError('email', {
+          message: 'This email address is already in use'
+        });
+      }
     });
   };
 

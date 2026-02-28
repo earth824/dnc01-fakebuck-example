@@ -7,8 +7,8 @@ export default function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 h-14 bg-white shadow-sm flex justify-between items-center px-4">
       {/* Left: Logo */}
-      <Link href="/" className="size-10 relative">
-        <Image alt="Fakebuck" src="/logo.png" fill />
+      <Link href="/" className="w-10 h-10 relative">
+        <Image alt="Fakebuck" src="/logo.png" fill sizes="auto" />
       </Link>
 
       {/* Center: Nav icons */}

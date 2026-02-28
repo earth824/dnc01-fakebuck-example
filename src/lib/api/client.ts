@@ -1,4 +1,5 @@
 import { serverEnv } from '@/config/server.env';
+import { ApiError, ApiSuccessData } from '@/lib/api/api-response.type';
 
 type RequestOptions = {
   method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
@@ -8,7 +9,7 @@ type RequestOptions = {
 
 const API_URL = serverEnv.API_URL;
 
-async function apiFetch<T = unknown>(
+async function apiFetch<T = void>(
   endpoint: string,
   options: RequestOptions = {}
 ) {
@@ -33,10 +34,13 @@ async function apiFetch<T = unknown>(
 
   const res = await fetch(`${API_URL}${endpoint}`, config);
   if (!res.ok) {
-    throw new Error('API ERROR');
+    const err = await res
+      .json()
+      .catch(() => ({ message: 'Internal server error' }));
+    throw new ApiError(err.message, err.code);
   }
 
-  return (await res.json()) as T;
+  return (await res.json()).data as ApiSuccessData<T>;
 }
 
 export const api = {
