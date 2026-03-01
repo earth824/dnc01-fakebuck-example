@@ -7,28 +7,34 @@ import { Camera } from 'lucide-react';
 
 type ProfileAvatarProps = {
   avatarUrl: User['avatarUrl'];
+  canEdit: boolean;
 };
 
-export default function ProfileAvatar({ avatarUrl }: ProfileAvatarProps) {
+export default function ProfileAvatar({
+  avatarUrl,
+  canEdit
+}: ProfileAvatarProps) {
   return (
     <div className="relative">
       <Avatar className="size-42 border bg-muted">
         <AvatarImage src={avatarUrl ?? '/user.png'} alt="Avatar" />
       </Avatar>
-      <ImageUploadDialog
-        trigger={
-          <Button
-            variant="outline"
-            className="absolute bottom-3 right-2 size-9 rounded-full shadow"
-          >
-            <Camera className="w-4 h-4" />
-          </Button>
-        }
-        title="Edit profile photo"
-        imageClassName="size-42 mx-auto rounded-full"
-        intialUrl={avatarUrl ?? '/user.png'}
-        onUpload={uploadAvatar}
-      />
+      {canEdit && (
+        <ImageUploadDialog
+          trigger={
+            <Button
+              variant="outline"
+              className="absolute bottom-3 right-2 size-9 rounded-full shadow"
+            >
+              <Camera className="w-4 h-4" />
+            </Button>
+          }
+          title="Edit profile photo"
+          imageClassName="size-42 mx-auto rounded-full"
+          intialUrl={avatarUrl ?? '/user.png'}
+          onUpload={uploadAvatar}
+        />
+      )}
     </div>
   );
 }

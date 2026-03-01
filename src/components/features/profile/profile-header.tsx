@@ -1,3 +1,4 @@
+import ProfileAction from '@/components/features/profile/profile-action';
 import ProfileAvatar from '@/components/features/profile/profile-avatar';
 import ProfileCover from '@/components/features/profile/profile-cover';
 import {
@@ -25,20 +26,28 @@ export default function ProfileHeader({
   return (
     <div className="bg-white shadow-sm">
       {/* Cover photo */}
-      <ProfileCover coverUrl={user.coverUrl} />
+      <ProfileCover
+        coverUrl={user.coverUrl}
+        canEdit={relationshipStatus === 'SELF'}
+      />
       {/* Info bar */}
       <div className="max-w-260 mx-auto my-7 px-4">
         <div className="flex items-end justify-between pb-3">
           {/* Left: Avatar + Name */}
           <div className="flex items-center gap-6">
             {/* Avatar */}
-            <ProfileAvatar avatarUrl={user.avatarUrl} />
+            <ProfileAvatar
+              avatarUrl={user.avatarUrl}
+              canEdit={relationshipStatus === 'SELF'}
+            />
 
             {/* Name + friends */}
             <div className="">
-              <h1 className="text-3xl font-bold">John Doe</h1>
+              <h1 className="text-3xl font-bold">
+                {user.firstName} {user.lastName}
+              </h1>
               <p className="text-muted-foreground text-sm font-semibold py-1">
-                500 friends
+                {user.friends.length} friends
               </p>
               <AvatarGroup>
                 <Avatar className="z-2">
@@ -67,16 +76,10 @@ export default function ProfileHeader({
           </div>
 
           {/* Right: Action buttons */}
-          <div className="flex items-center gap-2 pb-2">
-            <Button className="font-semibold">
-              <Check className="size-4" />
-              Confirm
-            </Button>
-            <Button variant="outline" className="font-semibold">
-              <Trash2 className="size-4" />
-              Delete
-            </Button>
-          </div>
+          <ProfileAction
+            relationshipStatus={relationshipStatus}
+            targetUserId={user.id}
+          />
         </div>
       </div>
     </div>
