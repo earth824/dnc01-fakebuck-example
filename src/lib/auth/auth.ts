@@ -3,7 +3,7 @@ import { loginSchema } from '@/lib/schemas/auth.schema';
 import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 
-export const { handlers, auth, signIn, signOut } = NextAuth({
+export const { handlers, auth, signIn, signOut, unstable_update } = NextAuth({
   providers: [
     Credentials({
       async authorize(credentials) {
@@ -14,7 +14,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     })
   ],
   callbacks: {
-    jwt({ token, user }) {
+    jwt({ token, user, trigger, session }) {
       if (user) {
         token.firstName = user.firstName;
         token.lastName = user.lastName;
@@ -34,6 +34,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         Date.now() / 1000 >= token.accessTokenExpiresAt
       ) {
         return null;
+      }
+
+      if (trigger === 'update' && session) {
+        token.avatarUrl = session.user.avatarUrl;
       }
 
       return token;

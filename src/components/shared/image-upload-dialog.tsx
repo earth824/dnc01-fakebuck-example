@@ -10,9 +10,10 @@ import {
   DialogTrigger
 } from '@/components/ui/dialog';
 import { ActionResult } from '@/lib/actions/action.type';
-import { cn, simLoading } from '@/lib/utils';
+import { cn } from '@/lib/utils';
 import { Loader2 } from 'lucide-react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { ReactNode, useRef, useState, useTransition } from 'react';
 
 type ImageUploadDialogProps = {
@@ -34,6 +35,7 @@ export default function ImageUploadDialog({
   const [file, setFile] = useState<File | null>(null);
   const inputEl = useRef<HTMLInputElement | null>(null);
   const [isPending, startTransition] = useTransition();
+  const router = useRouter();
 
   const imageUrl = file ? URL.createObjectURL(file) : intialUrl;
 
@@ -41,6 +43,8 @@ export default function ImageUploadDialog({
     startTransition(async () => {
       if (file) await onUpload(file);
       setOpen(false);
+      setFile(null);
+      router.refresh();
     });
   };
 

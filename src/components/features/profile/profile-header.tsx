@@ -1,3 +1,4 @@
+import ProfileAvatar from '@/components/features/profile/profile-avatar';
 import ProfileCover from '@/components/features/profile/profile-cover';
 import {
   Avatar,
@@ -10,7 +11,7 @@ import {
   RelationshipStatus,
   UserWithFriend
 } from '@/lib/api/user/user.service';
-import { Camera, Check, Trash2 } from 'lucide-react';
+import { Check, Trash2 } from 'lucide-react';
 
 type ProfileHeaderProps = {
   user: UserWithFriend;
@@ -31,17 +32,7 @@ export default function ProfileHeader({
           {/* Left: Avatar + Name */}
           <div className="flex items-center gap-6">
             {/* Avatar */}
-            <div className="relative">
-              <Avatar className="size-42 border">
-                <AvatarImage src={'/default-user.png'} alt="John Doe" />
-              </Avatar>
-              <Button
-                variant="outline"
-                className="absolute bottom-3 right-2 size-9 rounded-full shadow"
-              >
-                <Camera className="w-4 h-4" />
-              </Button>
-            </div>
+            <ProfileAvatar avatarUrl={user.avatarUrl} />
 
             {/* Name + friends */}
             <div className="">
