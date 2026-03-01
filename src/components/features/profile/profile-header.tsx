@@ -1,3 +1,4 @@
+import ProfileCover from '@/components/features/profile/profile-cover';
 import {
   Avatar,
   AvatarFallback,
@@ -23,22 +24,7 @@ export default function ProfileHeader({
   return (
     <div className="bg-white shadow-sm">
       {/* Cover photo */}
-      <div className="relative aspect-1095/405 bg-muted overflow-hidden rounded-b-lg max-w-273.75 mx-auto">
-        {/* <Image
-            src="/cover.jpeg"
-            alt="Cover photo"
-            fill
-            className="object-cover"
-          /> */}
-        <Button
-          variant="outline"
-          className="absolute bottom-4 right-4 bg-background shadow font-semibold rounded-lg"
-        >
-          <Camera className="size-4" />
-          Edit cover photo
-        </Button>
-      </div>
-
+      <ProfileCover coverUrl={user.coverUrl} />
       {/* Info bar */}
       <div className="max-w-260 mx-auto my-7 px-4">
         <div className="flex items-end justify-between pb-3">

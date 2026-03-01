@@ -30,5 +30,6 @@ type GetUserProfileResponse = {
 
 export const userService = {
   getUserProfile: (userId: string) =>
-    api.get<GetUserProfileResponse>(`/users/${userId}/profile`)
+    api.get<GetUserProfileResponse>(`/users/${userId}/profile`),
+  uploadCover: (input: FormData) => api.patch<string>('/users/me/cover', input)
 };

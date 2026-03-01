@@ -1,8 +1,9 @@
 import { serverEnv } from '@/config/server.env';
 import { ApiError } from '@/lib/api/api-response.type';
 import { auth } from '@/lib/auth/auth';
+import { redirect } from 'next/navigation';
 
-// const TOKEN_ERROR_CODES = ['TOKEN_EXPIRED', 'INVALID_TOKEN'];
+const TOKEN_ERROR_CODES = ['TOKEN_EXPIRED', 'INVALID_TOKEN'];
 
 type RequestOptions = {
   method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
@@ -42,6 +43,9 @@ async function apiFetch<T = void>(
 
   if (!res.ok) {
     const err = await res.json();
+    if (res.status === 401 && TOKEN_ERROR_CODES.includes(err.code)) {
+      redirect('/api/proxy/clear-session');
+    }
     throw new ApiError(err.message, err.code);
   }
 
