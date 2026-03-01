@@ -5,9 +5,21 @@ import {
   AvatarImage
 } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
+import {
+  RelationshipStatus,
+  UserWithFriend
+} from '@/lib/api/user/user.service';
 import { Camera, Check, Trash2 } from 'lucide-react';
 
-export default function ProfileHeader() {
+type ProfileHeaderProps = {
+  user: UserWithFriend;
+  relationshipStatus: RelationshipStatus;
+};
+
+export default function ProfileHeader({
+  user,
+  relationshipStatus
+}: ProfileHeaderProps) {
   return (
     <div className="bg-white shadow-sm">
       {/* Cover photo */}

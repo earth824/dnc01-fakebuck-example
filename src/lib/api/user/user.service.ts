@@ -1,4 +1,6 @@
-export type Gender = 'MALE' | 'FEMALE' | 'OTHER';
+import { api } from '@/lib/api/client';
+
+type Gender = 'MALE' | 'FEMALE' | 'OTHER';
 
 export type User = {
   id: string;
@@ -11,4 +13,22 @@ export type User = {
   coverUrl: string | null;
   createdAt: string;
   updatedAt: string;
+};
+
+export type UserWithFriend = User & { friends: User[] };
+export type RelationshipStatus =
+  | 'NONE'
+  | 'FRIEND'
+  | 'SELF'
+  | 'REQUEST_SENT'
+  | 'REQUEST_RECEIVED';
+
+type GetUserProfileResponse = {
+  user: UserWithFriend;
+  relationshipStatus: RelationshipStatus;
+};
+
+export const userService = {
+  getUserProfile: (userId: string) =>
+    api.get<GetUserProfileResponse>(`/users/${userId}/profile`)
 };
