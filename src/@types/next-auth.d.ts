@@ -22,5 +22,6 @@ declare module 'next-auth/jwt' {
     avatarUrl?: string | null;
     coverUrl?: string | null;
     accessToken?: string;
+    accessTokenExpiresAt?: number;
   }
 }

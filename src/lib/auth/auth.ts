@@ -21,7 +21,21 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         token.avatarUrl = user.avatarUrl;
         token.coverUrl = user.coverUrl;
         token.accessToken = user.accessToken;
+
+        const [, payloadB64] = user.accessToken!.split('.');
+        const { exp } = JSON.parse(
+          Buffer.from(payloadB64, 'base64url').toString()
+        ) as { exp: number };
+        token.accessTokenExpiresAt = exp - 10;
       }
+
+      if (
+        token.accessTokenExpiresAt &&
+        Date.now() / 1000 >= token.accessTokenExpiresAt
+      ) {
+        return null;
+      }
+
       return token;
     },
     session({ session, token }) {

@@ -2,6 +2,8 @@ import { serverEnv } from '@/config/server.env';
 import { ApiError } from '@/lib/api/api-response.type';
 import { auth } from '@/lib/auth/auth';
 
+// const TOKEN_ERROR_CODES = ['TOKEN_EXPIRED', 'INVALID_TOKEN'];
+
 type RequestOptions = {
   method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
   body?: unknown;
@@ -37,10 +39,9 @@ async function apiFetch<T = void>(
   };
 
   const res = await fetch(`${API_URL}${endpoint}`, config);
+
   if (!res.ok) {
-    const err = await res
-      .json()
-      .catch(() => ({ message: 'Internal server error' }));
+    const err = await res.json();
     throw new ApiError(err.message, err.code);
   }
 
