@@ -1,12 +1,21 @@
 import { Button } from '@/components/ui/button';
+import { User } from '@/lib/api/user/user.service';
+import Image from 'next/image';
 
-export default function FriendCard() {
+type FriendCardProps = User;
+
+export default function FriendCard({ avatarUrl }: FriendCardProps) {
   return (
     <div className="bg-background rounded-lg shadow-sm overflow-hidden w-full max-w-60 border">
       {/* Profile image */}
       <div className="relative aspect-square w-full">
-        {/* <Image src="/default-user.png" alt="" fill className="object-cover" /> */}
-        <div className="h-full bg-muted flex items-center justify-center"></div>
+        <Image
+          src={avatarUrl ?? '/user.png'}
+          alt="User"
+          fill
+          className="object-cover"
+        />
+        {/* <div className="h-full bg-muted flex items-center justify-center"></div> */}
       </div>
 
       {/* Info + actions */}
