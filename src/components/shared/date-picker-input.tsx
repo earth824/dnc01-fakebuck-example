@@ -10,22 +10,19 @@ import {
 import { CalendarIcon } from 'lucide-react';
 import { format } from 'date-fns';
 import { useState } from 'react';
-import {
-  ControllerFieldState,
-  ControllerRenderProps,
-  FieldPath,
-  FieldValues
-} from 'react-hook-form';
 
-export default function DatePickerInput<
-  TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
->({
-  field,
-  fieldState
+export default function DatePickerInput({
+  id,
+  onBlur,
+  onChange,
+  isInvalid,
+  value
 }: {
-  field: ControllerRenderProps<TFieldValues, TName>;
-  fieldState: ControllerFieldState;
+  id: string;
+  onBlur: () => void;
+  onChange: (...event: unknown[]) => void;
+  isInvalid: boolean;
+  value: Date;
 }) {
   const [open, setOpen] = useState(false);
 
@@ -35,12 +32,12 @@ export default function DatePickerInput<
         <Button
           variant="outline"
           className="justify-between px-3 font-normal"
-          id={field.name}
-          onBlur={field.onBlur}
-          aria-invalid={fieldState.invalid}
+          id={id}
+          onBlur={onBlur}
+          aria-invalid={isInvalid}
         >
-          {field.value ? (
-            format(field.value, 'dd MMMM yyyy')
+          {value ? (
+            format(value, 'dd MMMM yyyy')
           ) : (
             <span className="text-muted-foreground">Select date</span>
           )}
@@ -52,11 +49,11 @@ export default function DatePickerInput<
         <Calendar
           mode="single"
           captionLayout="dropdown"
-          selected={field.value}
-          defaultMonth={field.value}
+          selected={value}
+          defaultMonth={value}
           onSelect={(date) => {
             setOpen(false);
-            field.onChange(date);
+            onChange(date);
           }}
         />
       </PopoverContent>

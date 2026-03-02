@@ -33,7 +33,8 @@ export default function RegisterForm() {
       dob: undefined,
       gender: undefined
     },
-    resolver: zodResolver(registerSchema)
+    resolver: zodResolver(registerSchema),
+    mode: 'onBlur'
   });
 
   const [isPending, startTransition] = useTransition();
@@ -100,7 +101,13 @@ export default function RegisterForm() {
           render={({ field, fieldState }) => (
             <Field className="gap-1" data-invalid={fieldState.invalid}>
               <FieldLabel htmlFor={field.name}>Date of birth</FieldLabel>
-              <DatePickerInput field={field} fieldState={fieldState} />
+              <DatePickerInput
+                id={field.name}
+                isInvalid={fieldState.invalid}
+                value={field.value}
+                onChange={field.onChange}
+                onBlur={field.onBlur}
+              />
               {fieldState.invalid && (
                 <FieldError errors={[fieldState.error]} className="text-xs" />
               )}
