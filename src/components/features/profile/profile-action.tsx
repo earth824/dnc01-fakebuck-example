@@ -1,7 +1,7 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
-import { ActionResult } from '@/lib/actions/action.type';
+import ActionButton from '@/components/features/friend/action-button';
+import { FriendActionFn } from '@/lib/actions/action.type';
 import {
   cancelRequest,
   confirmRequest,
@@ -17,18 +17,16 @@ type ProfileActionProps = {
   relationshipStatus: RelationshipStatus;
 };
 
-type ActionFn = (id: string) => Promise<ActionResult>;
-
 const actionMap: Record<
   Exclude<RelationshipStatus, 'SELF'>,
   {
     confirm?: {
-      action: ActionFn;
+      action: FriendActionFn;
       icon: React.ReactNode;
       label: string;
     };
     cancel?: {
-      action: ActionFn;
+      action: FriendActionFn;
       icon: React.ReactNode;
       label: string;
     };
@@ -80,23 +78,21 @@ export default function ProfileAction({
   return (
     <div className="flex items-center gap-2 pb-2">
       {confirm && (
-        <Button
-          className="font-semibold"
-          onClick={() => confirm.action(targetUserId)}
-        >
-          {confirm.icon}
-          {confirm.label}
-        </Button>
+        <ActionButton
+          action={confirm.action}
+          label={confirm.label}
+          targetUserId={targetUserId}
+          icon={confirm.icon}
+        />
       )}
       {cancel && (
-        <Button
+        <ActionButton
+          action={cancel.action}
+          label={cancel.label}
+          targetUserId={targetUserId}
+          icon={cancel.icon}
           variant="outline"
-          className="font-semibold"
-          onClick={() => cancel.action(targetUserId)}
-        >
-          {cancel.icon}
-          {cancel.label}
-        </Button>
+        />
       )}
     </div>
   );

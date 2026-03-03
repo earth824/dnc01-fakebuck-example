@@ -9,3 +9,5 @@ export type ErrorActionResult = {
 };
 
 export type ActionResult = SuccessActionResult | ErrorActionResult;
+
+export type FriendActionFn = (id: string) => Promise<ActionResult>;

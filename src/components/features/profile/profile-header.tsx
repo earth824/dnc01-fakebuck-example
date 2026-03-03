@@ -7,12 +7,11 @@ import {
   AvatarGroup,
   AvatarImage
 } from '@/components/ui/avatar';
-import { Button } from '@/components/ui/button';
+
 import {
   RelationshipStatus,
   UserWithFriend
 } from '@/lib/api/user/user.service';
-import { Check, Trash2 } from 'lucide-react';
 
 type ProfileHeaderProps = {
   user: UserWithFriend;
